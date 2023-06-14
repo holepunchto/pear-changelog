@@ -13,12 +13,7 @@ function parse (b) {
 
   const releasesAsStrings = noHeader.split(/(?=\n## )/) // splits changelog into an array of strings, one per release
 
-  const releasesAsObjects = releasesAsStrings.map(x => {
-    const clean = x.slice(x.indexOf('##')).trim()
-    return [clean.split('\n')[0].slice(2).trim(),
-      clean]
-  }
-  )
+  const releasesAsObjects = releasesAsStrings.map(parseRelease)
 
   return releasesAsObjects
 }
@@ -27,6 +22,13 @@ function diff (newLog, oldLog) {
   const oldMap = new Map(oldLog)
   const results = newLog.filter(x => !oldMap.has(x[0]))
   return results
+}
+
+function parseRelease (x) {
+  const clean = x.slice(x.indexOf('##')).trim()
+  const nl = clean.indexOf('\n')
+  const id = clean.slice(2, nl < 0 ? clean.length : nl).trim()
+  return [id, clean]
 }
 
 module.exports = { parse, diff }
