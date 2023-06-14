@@ -10,13 +10,13 @@ content
 const bSimple = Buffer.from(simpleLog)
 
 test('string parsing', function (t) {
-  t.ok(parse(simpleLog)[0][0] === 'title')
+  t.is(parse(simpleLog)[0][0], 'title')
 })
 
 test('simple parsing', function (t) {
   const parsed = parse(bSimple)[0]
-  t.ok(parsed[0] === 'title')
-  t.ok(parsed[1] === '## title\ncontent')
+  t.is(parsed[0], 'title')
+  t.is(parsed[1], '## title\ncontent')
 })
 
 test('simple difference', function (t) {
@@ -51,7 +51,7 @@ random
   const bNew = Buffer.from(newLog)
   const bOld = Buffer.from(oldLog)
   const difference = diff(parse(bNew), parse(bOld))
-  t.ok(difference.length === 1)
+  t.is(difference.length, 1)
 })
 
 test('empty log', function (t) {
@@ -70,5 +70,5 @@ A little comment about this release
 
 test('win string', function (t) {
   const winLog = '\r\n# Changelog\r\n\r\n## title\r\ncontent\r\n'
-  t.ok(parse(winLog)[0][0] === 'title')
+  t.is(parse(winLog)[0][0], 'title')
 })
