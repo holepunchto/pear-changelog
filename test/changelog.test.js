@@ -45,6 +45,7 @@ A little comment about this release
 
 ##this one neither
 `
+const winLog = '\r\n# Changelog\r\n\r\n## title\r\ncontent\r\n'
 
 const bSimple = Buffer.from(simpleLog)
 const bNew = Buffer.from(newLog)
@@ -58,7 +59,8 @@ test('string parsing', function (t) {
 test('simple parsing', function (t) {
   const parsed = parse(bSimple)[0]
   t.ok(parsed[0] === 'title')
-  t.ok(parsed[1] === '\n## title\ncontent\n')
+  console.log(parsed[1])
+  t.ok(parsed[1] === '## title\ncontent')
 })
 
 test('simple difference', function (t) {
@@ -68,4 +70,8 @@ test('simple difference', function (t) {
 
 test('empty log', function (t) {
   t.exception(() => { parse(bEmpty) })
+})
+
+test('win string', function (t) {
+  t.ok(parse(winLog)[0][0] === 'title')
 })
