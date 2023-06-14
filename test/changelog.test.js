@@ -7,7 +7,20 @@ const simpleLog = `
 ## title
 content
 `
-const newLog = `
+const bSimple = Buffer.from(simpleLog)
+
+test('string parsing', function (t) {
+  t.ok(parse(simpleLog)[0][0] === 'title')
+})
+
+test('simple parsing', function (t) {
+  const parsed = parse(bSimple)[0]
+  t.ok(parsed[0] === 'title')
+  t.ok(parsed[1] === '## title\ncontent')
+})
+
+test('simple difference', function (t) {
+  const newLog = `
 # Changelog
 
 A little comment about this release
@@ -23,7 +36,7 @@ random
 ### stuff
 `
 
-const oldLog = `
+  const oldLog = `
 # Changelog
 
 A little comment about this release
@@ -35,8 +48,14 @@ arbitrary markdown here, like *this*
 random
 ### stuff
 `
+  const bNew = Buffer.from(newLog)
+  const bOld = Buffer.from(oldLog)
+  const difference = diff(parse(bNew), parse(bOld))
+  t.ok(difference.length === 1)
+})
 
-const emptyLog = `
+test('empty log', function (t) {
+  const emptyLog = `
 # Changelog
 
 A little comment about this release
@@ -45,33 +64,11 @@ A little comment about this release
 
 ##this one neither
 `
-const winLog = '\r\n# Changelog\r\n\r\n## title\r\ncontent\r\n'
-
-const bSimple = Buffer.from(simpleLog)
-const bNew = Buffer.from(newLog)
-const bOld = Buffer.from(oldLog)
-const bEmpty = Buffer.from(emptyLog)
-
-test('string parsing', function (t) {
-  t.ok(parse(simpleLog)[0][0] === 'title')
-})
-
-test('simple parsing', function (t) {
-  const parsed = parse(bSimple)[0]
-  t.ok(parsed[0] === 'title')
-  console.log(parsed[1])
-  t.ok(parsed[1] === '## title\ncontent')
-})
-
-test('simple difference', function (t) {
-  const difference = diff(parse(bNew), parse(bOld))
-  t.ok(difference.length === 1)
-})
-
-test('empty log', function (t) {
+  const bEmpty = Buffer.from(emptyLog)
   t.exception(() => { parse(bEmpty) })
 })
 
 test('win string', function (t) {
+  const winLog = '\r\n# Changelog\r\n\r\n## title\r\ncontent\r\n'
   t.ok(parse(winLog)[0][0] === 'title')
 })

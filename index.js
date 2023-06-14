@@ -13,7 +13,12 @@ function parse (b) {
 
   const releasesAsStrings = noHeader.split(/(?=\n## )/) // splits changelog into an array of strings, one per release
 
-  const releasesAsObjects = releasesAsStrings.map(x => [x.trim().split('\n')[0].slice(x.indexOf('##') + 2).trim(), x.slice(x.indexOf('##')).trim()]) // stores each string into an object with an id field
+  const releasesAsObjects = releasesAsStrings.map(x => {
+    const clean = x.slice(x.indexOf('##')).trim()
+    return [clean.split('\n')[0].slice(2).trim(),
+      clean]
+  }
+  )
 
   return releasesAsObjects
 }
