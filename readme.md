@@ -1,4 +1,4 @@
-# Description
+# changelog
 
 A couple of functions to parse and compare changelogs buffers for the Holepunch platform
 
@@ -73,3 +73,7 @@ console.log(difference)
 // this prints [ [ 'newer entry', '\n## newer entry\ncontent\n' ] ]
 
 ```
+
+## License
+
+This project is licensed under the Apache 2.0 license.

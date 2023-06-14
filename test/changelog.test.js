@@ -51,8 +51,14 @@ const bNew = Buffer.from(newLog)
 const bOld = Buffer.from(oldLog)
 const bEmpty = Buffer.from(emptyLog)
 
+test('string parsing', function (t) {
+  t.ok(parse(simpleLog)[0][0] === 'title')
+})
+
 test('simple parsing', function (t) {
-  t.ok(parse(bSimple)[0][0] === 'title')
+  const parsed = parse(bSimple)[0]
+  t.ok(parsed[0] === 'title')
+  t.ok(parsed[1] === '\n## title\ncontent\n')
 })
 
 test('simple difference', function (t) {
