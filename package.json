@@ -1,6 +1,6 @@
 {
   "name": "@holepunchto/changelog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Helper functions to parse changelogs",
   "main": "index.js",
   "scripts": {
