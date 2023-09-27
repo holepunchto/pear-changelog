@@ -3,11 +3,19 @@
 const b4a = require('b4a')
 
 function parse (b) {
-  const stringedSource = typeof b === 'string' ? b : b4a.toString(b) // turn the buffer into a string
+  let stringedSource = null
+
+  if (typeof b === 'string') {
+    stringedSource = b
+  } else if (Buffer.isBuffer(b)) {
+    stringedSource = b4a.toString(b)
+  } else {
+    return []
+  }
 
   const firstReleaseIndex = stringedSource.indexOf('\n## ')
 
-  if (firstReleaseIndex < 0) throw new Error('No releases or header found')
+  if (firstReleaseIndex < 0) return []
 
   const noHeader = stringedSource.slice(firstReleaseIndex) // removes the header of the changelog
 

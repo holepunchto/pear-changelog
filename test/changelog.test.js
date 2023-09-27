@@ -65,7 +65,16 @@ A little comment about this release
 ##this one neither
 `
   const bEmpty = Buffer.from(emptyLog)
-  t.exception(() => { parse(bEmpty) })
+  const emptyArray = parse(bEmpty)
+  const expectedResult = []
+  t.alike(emptyArray, expectedResult)
+})
+
+test('wrong type', function (t) {
+  const wrongArg = 777
+  const emptyArray = parse(wrongArg)
+  const expectedResult = []
+  t.alike(emptyArray, expectedResult)
 })
 
 test('win string', function (t) {

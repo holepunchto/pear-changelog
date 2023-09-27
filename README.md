@@ -33,7 +33,7 @@ const { parse, diff } = require('changelog')
 
 the `parse` function returns an array of releases.
 Each release is another array, with index 0 being the title of the release, and index 1 being the entire body of the release (in markdown, including the title).
-It will throw if the markdown string lacks a header or any parsable releases
+If it receives anything other than a string or a buffer with the correct format, it will return an empty array.
 
 the `diff` function compares two arrays of releases, and return a new array with the releases that are in the first array but not in the second one.
 
