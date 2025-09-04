@@ -1,6 +1,6 @@
 {
   "name": "pear-changelog",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Changelog parsing & diffing",
   "main": "index.js",
   "scripts": {
