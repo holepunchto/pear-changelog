@@ -1,6 +1,6 @@
-# changelog
+# pear-changelog
 
-A couple of functions to parse and compare changelogs buffers for the Holepunch platform
+Changelog parsing and diffing
 
 ## Format
 
@@ -28,7 +28,7 @@ content
 The module contains a couple of functions:
 
 ```javascript
-const { parse, diff } = require('changelog')
+const { parse, diff } = require('pear-changelog')
 ```
 
 the `parse` function returns an array of releases.
@@ -76,4 +76,4 @@ console.log(difference)
 
 ## License
 
-This project is licensed under the Apache 2.0 license.
+Apache 2.0
