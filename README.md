@@ -10,16 +10,19 @@ The format of the changelog is fairly simple
 arbitrary mardown here as a header
 
 ## release title
+
 arbitrary markdown here
 
 ## release title
+
 arbitrary markdown here
 ```
 
-There is a header of unspecified shape, and various release entries, that use the format 
+There is a header of unspecified shape, and various release entries, that use the format
 
 ```markdown
 ## title
+
 content
 ```
 
@@ -71,7 +74,6 @@ const difference = diff(pLog1, pLog2)
 console.log(difference)
 
 // this prints [ [ 'newer entry', '\n## newer entry\ncontent\n' ] ]
-
 ```
 
 ## License
