@@ -2,7 +2,7 @@
 
 const b4a = require('b4a')
 
-function parse (b) {
+function parse(b) {
   let stringedSource = null
 
   if (typeof b === 'string') {
@@ -26,13 +26,13 @@ function parse (b) {
   return releasesAsObjects
 }
 
-function diff (newLog, oldLog) {
+function diff(newLog, oldLog) {
   const oldMap = new Map(oldLog)
-  const results = newLog.filter(x => !oldMap.has(x[0]))
+  const results = newLog.filter((x) => !oldMap.has(x[0]))
   return results
 }
 
-function parseRelease (x) {
+function parseRelease(x) {
   const clean = x.slice(x.indexOf('##')).trim()
   const nl = clean.indexOf('\n')
   const id = clean.slice(2, nl < 0 ? clean.length : nl).trim()
